@@ -12,8 +12,6 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // run when client connects
 io.on("connection", (socket) => {
-  console.log("New WS connection...");
-
   // welcome current user
   socket.emit("message", "Welcome to Chatchord");
 
@@ -23,6 +21,10 @@ io.on("connection", (socket) => {
   //runs when a client disconnects
   socket.on("disconnect", () => {
     io.emit("message", "A user has left the chat");
+  });
+
+  socket.on("chatMessage", (msg) => {
+    io.emit("message", msg);
   });
 });
 
