@@ -7,7 +7,9 @@ const userJoin = (id, username, room) => {
 };
 
 const userLeave = (id) => {
-  return users.filter((user) => user.id === id)[0];
+  const user = users.filter((user) => user.id === id)[0];
+  users = users.filter((user) => user.id !== id);
+  return user;
 };
 
 const getCurrentUser = (id) => {
@@ -15,7 +17,7 @@ const getCurrentUser = (id) => {
 };
 
 const getRoomUsers = (room) => {
-  return users.filter((room) => user.room === room);
+  return users.filter((user) => user.room === room);
 };
 
 module.exports = { userJoin, userLeave, getCurrentUser, getRoomUsers };
